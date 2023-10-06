@@ -21,6 +21,7 @@
 
 #ifdef ESP32
   #include "rom/tjpgd.h" // For native ESP32 jpeg decoder
+  #include <FFat.h>
   #include "SPIFFS.h"    // ESP32 only
 #endif
 
@@ -76,6 +77,7 @@ class TFT_eFEX : public TFT_eSPI {
            // Draw a bitmap stored in SPIFFS to the TFT or a Sprite if a Sprite instance is included
   void     drawBmp(String filename, int16_t x, int16_t y, TFT_eSprite *_spr = nullptr);
 //To do:  void     drawBmp(const char *filename, int16_t x, int16_t y, TFT_eSprite *_spr = nullptr);
+  void     drawBmp(fs::F_Fat &fs,String filename, int16_t x, int16_t y, TFT_eSprite *_spr = nullptr);
 
            // Draw a Jpeg to the TFT, or to a Sprite if a Sprite instance is included (uses JPEGDecoder library)
   void     drawJpeg(String filename, int16_t xpos, int16_t ypos, TFT_eSprite *_spr = nullptr);
@@ -104,8 +106,6 @@ class TFT_eFEX : public TFT_eSPI {
   void     setCursorRTL(int32_t cx, int32_t cy);
   void     drawStringRTL(const String& string);
   void     drawStringRTL(const char *string, int32_t *x, int32_t *y);
-  void     drawStringRTLAr(const String& string);
-  void     drawStringRTLAr(const char *string, int32_t *x, int32_t *y);
   void     drawStringLTR(const String& string);
   void     drawStringLTR(const char *string, int32_t *x, int32_t *y);
 
